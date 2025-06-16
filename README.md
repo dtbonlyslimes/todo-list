@@ -1,46 +1,104 @@
-# Getting Started with Create React App
+# ✅ To-Do List Application
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📌 Опис
 
-## Available Scripts
+Гнучкий і розширюваний застосунок **To-Do List**, створений з використанням **React**, **TypeScript** та **Material-UI**. Додаток реалізує шаблони проєктування для керування станами завдань, пріоритетами та оновленням інтерфейсу.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Функціонал
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- ➕ Додавання, ✏️ редагування та 🗑️ видалення завдань
+- ⭐ Встановлення пріоритетів (**Високий | Середній | Низький**)
+- 🔄 Керування станами завдань (**Нове | В процесі | Завершене | Відкладене**)
+- 🔎 Фільтрація за станами
+- ↕️ Сортування за пріоритетом або датою створення
+- 💾 Постійне збереження у **localStorage**
+- 🎨 Сучасний інтерфейс (**Material-UI**)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+## 🧩 Використані шаблони проєктування
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Шаблон        | Тип            | Призначення                                                      | Використання                         |
+|---------------|----------------|-------------------------------------------------------------------|--------------------------------------|
+| 🗂 **State**  | Поведінковий   | Керує станами завдань та їх переходами                           | Зміна статусу: Нове → Завершене     |
+| 🎨 **Strategy** | Поведінковий | Обробка відображення та поведінки пріоритетів                    | Відображення кольорів пріоритетів   |
+| 🏭 **Factory** | Генеративний  | Створення завдання з типовими значеннями                         | Швидке формування нового завдання   |
+| 👁 **Observer** | Поведінковий | Сповіщає компоненти UI про зміни даних                           | Оновлення списку завдань            |
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Uml Diagram 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```mermaid
+graph TD
+    A[App.tsx] --> B(components/TaskForm.tsx)
+    A --> C(components/TaskList.tsx)
+    B --> D[services/TaskService.ts]
+    C --> D
+    D --> E(patterns/factory/TaskFactory.ts)
+    D --> F(patterns/observer/TaskSubject.ts)
+    D --> G(patterns/state/TaskStateHandlers.ts)
+    D --> H(patterns/strategy/PriorityStrategies.ts)
+    D --> I(adapters/StorageAdapter.ts)
+    I -- implements --> J(adapters/LocalStorageAdapter.ts)
+    D -- uses --> J
+    F --> C
+    subgraph Patterns
+        E
+        F
+        G
+        H
+    end
+    subgraph Adapters
+        I
+        J
+    end
+    subgraph Services
+        D
+    end
+    subgraph Types
+        K(types/index.ts)
+    end
+    E --> K
+    F --> K
+    G --> K
+    H --> K
+    D --> K
+    C --> K
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### 📦 Передумови
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **Node.js** `v14` або вище
+- **npm** або **yarn**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🔧 Інсталяція
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+git clone https://github.com/your-username/todo-list-app.git
+cd todo-list-app
+npm install
+npm run
+```
+# ✅ Тестування
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+У проєкті реалізовані **модульні тести (unit tests)** для перевірки основних функцій застосунку:
 
-## Learn More
+- 📂 **tests/** — каталог з тестами
+- 🗂️ Перевіряються:
+  - Створення нового завдання
+  - Оновлення статусу завдання
+  - Видалення завдань
+  - Фільтрація та сортування
+  - Збереження/завантаження з `localStorage`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### ▶️ Запуск тестів
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm test
+# або
+yarn test
