@@ -26,9 +26,9 @@ import { LocalStorageAdapter } from '../adapters/LocalStorageAdapter';
  */
 export class TaskService {
   private static instance: TaskService;
-  private taskFactory: ConcreteTaskFactory;
-  private taskSubject: TaskSubject;
-  private storageAdapter: StorageAdapter;
+  private readonly taskFactory: ConcreteTaskFactory;
+  private readonly taskSubject: TaskSubject;
+  private readonly storageAdapter: StorageAdapter;
   private readonly STORAGE_KEY = 'tasks';
 
   /**

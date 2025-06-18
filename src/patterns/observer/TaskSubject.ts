@@ -11,7 +11,7 @@ import { Task, TaskObserver } from '../../types';
  * When the tasks list is updated, all attached observers are notified.
  */
 export class TaskSubject {
-  private observers: TaskObserver[] = [];
+  private readonly observers: TaskObserver[] = [];
   private tasks: Task[] = [];
 
   /**
