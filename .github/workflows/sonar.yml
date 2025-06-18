@@ -1,0 +1,28 @@
+name: SonarCloud
+
+on:
+  workflow_dispatch:    # дозволяє запускати вручну з GitHub UI
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and analyze on SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm test -- --coverage
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=dtbonlyslimes_todo-list
+            -Dsonar.organization=dtbonlyslimes
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}

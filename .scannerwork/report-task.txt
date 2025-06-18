@@ -1,0 +1,7 @@
+organization=dtbonlyslimes-1
+projectKey=dtbonlyslimes_todo-list
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.64597
+dashboardUrl=https://sonarcloud.io/dashboard?id=dtbonlyslimes_todo-list
+ceTaskId=AZeFYEHvid-SUq6gtLXF
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZeFYEHvid-SUq6gtLXF
