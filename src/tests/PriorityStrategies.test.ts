@@ -12,6 +12,10 @@ describe('Priority Strategies', () => {
     test('should return correct color', () => {
       expect(strategy.getColor()).toBe('#ff4d4d');
     });
+
+    test('HighPriorityStrategy returns correct color', () => {
+      expect(strategy.getColor()).toBe('#ff4d4d');
+    });
   });
 
   describe('MediumPriorityStrategy', () => {
@@ -35,6 +39,10 @@ describe('Priority Strategies', () => {
 
     test('should return correct color', () => {
       expect(strategy.getColor()).toBe('#4dff4d');
+    });
+
+    test('LowPriorityStrategy returns correct priority level', () => {
+      expect(strategy.getPriorityLevel()).toBe(1);
     });
   });
 

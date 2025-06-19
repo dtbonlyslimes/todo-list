@@ -107,4 +107,12 @@ describe('TaskSubject', () => {
     expect(subject.getTasks()[0].title).toBe('Task 1');
     expect(subject.getTasks()[1].state).toBe(TaskState.IN_PROGRESS);
   });
+
+  test('TaskSubject notifies observers', () => {
+    const subject = new TaskSubject();
+    const observer = { update: jest.fn() };
+    subject.attach(observer);
+    subject.setTasks([{ id: '1', title: 't', description: '', state: TaskState.NEW, priority: TaskPriority.HIGH, createdAt: new Date(), updatedAt: new Date() }]);
+    expect(observer.update).toHaveBeenCalled();
+  });
 }); 

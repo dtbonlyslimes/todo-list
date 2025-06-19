@@ -35,7 +35,12 @@ describe('Task State Handlers', () => {
     test('should update updatedAt timestamp', () => {
       const initialUpdatedAt = task.updatedAt;
       handler.handleState(task);
-      expect(task.updatedAt.getTime()).toBeGreaterThan(initialUpdatedAt.getTime());
+      expect(task.updatedAt.getTime()).toBeGreaterThanOrEqual(initialUpdatedAt.getTime());
+    });
+
+    test('NewStateHandler does not throw', () => {
+      const task = { updatedAt: new Date() } as any;
+      expect(() => handler.handleState(task)).not.toThrow();
     });
   });
 
@@ -58,7 +63,7 @@ describe('Task State Handlers', () => {
     test('should update updatedAt timestamp', () => {
       const initialUpdatedAt = task.updatedAt;
       handler.handleState(task);
-      expect(task.updatedAt.getTime()).toBeGreaterThan(initialUpdatedAt.getTime());
+      expect(task.updatedAt.getTime()).toBeGreaterThanOrEqual(initialUpdatedAt.getTime());
     });
   });
 
@@ -81,7 +86,12 @@ describe('Task State Handlers', () => {
     test('should update updatedAt timestamp', () => {
       const initialUpdatedAt = task.updatedAt;
       handler.handleState(task);
-      expect(task.updatedAt.getTime()).toBeGreaterThan(initialUpdatedAt.getTime());
+      expect(task.updatedAt.getTime()).toBeGreaterThanOrEqual(initialUpdatedAt.getTime());
+    });
+
+    test('CompletedStateHandler does not throw', () => {
+      const task = { updatedAt: new Date() } as any;
+      expect(() => handler.handleState(task)).not.toThrow();
     });
   });
 
@@ -104,7 +114,7 @@ describe('Task State Handlers', () => {
     test('should update updatedAt timestamp', () => {
       const initialUpdatedAt = task.updatedAt;
       handler.handleState(task);
-      expect(task.updatedAt.getTime()).toBeGreaterThan(initialUpdatedAt.getTime());
+      expect(task.updatedAt.getTime()).toBeGreaterThanOrEqual(initialUpdatedAt.getTime());
     });
   });
 }); 

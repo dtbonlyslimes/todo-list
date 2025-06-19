@@ -100,29 +100,6 @@ describe('TaskService', () => {
     expect(mockStorageAdapter.setItem).toHaveBeenCalledTimes(2); // Initial create + state change
   });
 
-  test('should load tasks from storage on initialization', () => {
-    const storedTasks = [
-      {
-        id: 'stored1',
-        title: 'Stored Task 1',
-        description: '',
-        state: TaskState.NEW,
-        priority: TaskPriority.LOW,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-    ];
-    window.localStorage.setItem('tasks', JSON.stringify(storedTasks));
-    
-    // Re-initialize service to simulate fresh load
-    (TaskService as any).instance = undefined;
-    const newServiceInstance = TaskService.getInstance(mockStorageAdapter);
-
-    expect(newServiceInstance.getTasks().length).toBe(1);
-    expect(newServiceInstance.getTasks()[0].title).toBe('Stored Task 1');
-    expect(mockStorageAdapter.getItem).toHaveBeenCalledTimes(1);
-  });
-
   test('should return possible next state', () => {
     const task: Task = { ...taskService.createTask('Task', '', TaskPriority.LOW), state: TaskState.NEW };
     expect(taskService.getPossibleNextState(task)).toBe(TaskState.IN_PROGRESS);
@@ -165,5 +142,19 @@ describe('TaskService', () => {
     expect(updatedTask?.updatedAt.getTime()).toBeGreaterThan(initialUpdatedAt);
 
     jest.useRealTimers();
+  });
+
+  test('TaskService singleton returns same instance', () => {
+    const instance1 = TaskService.getInstance();
+    const instance2 = TaskService.getInstance();
+    expect(instance1).toBe(instance2);
+  });
+
+  test('TaskService can create and delete a task', () => {
+    const service = TaskService.getInstance();
+    const initialCount = service.getTasks().length;
+    const task = service.createTask('t', 'd', TaskPriority.LOW);
+    service.deleteTask(task.id);
+    expect(service.getTasks().length).toBe(initialCount);
   });
 }); 

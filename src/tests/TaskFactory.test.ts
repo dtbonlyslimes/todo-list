@@ -58,4 +58,14 @@ describe('ConcreteTaskFactory', () => {
     expect(mediumTask.priority).toBe(TaskPriority.MEDIUM);
     expect(lowTask.priority).toBe(TaskPriority.LOW);
   });
+
+  test('TaskFactory creates a task with correct title', () => {
+    const task = factory.createTask('Test', 'Desc', TaskPriority.HIGH);
+    expect(task.title).toBe('Test');
+  });
+
+  test('TaskFactory creates a task with correct priority', () => {
+    const task = factory.createTask('Test', 'Desc', TaskPriority.LOW);
+    expect(task.priority).toBe(TaskPriority.LOW);
+  });
 }); 
